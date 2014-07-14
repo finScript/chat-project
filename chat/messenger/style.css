@@ -1,0 +1,156 @@
+#top_bar {
+	
+	border-bottom: 1px solid black;
+	padding-bottom: 5px;
+	
+}
+
+#msg_area {
+	
+	margin-top: 30px;
+	min-height: 600px;
+	max-height: 600px;
+	border: 1px solid black;
+	max-width: 60%;
+	min-width: 60%;
+	padding: 30px;
+	
+	overflow: scroll;
+	
+}
+
+#send_area {
+	
+	
+	
+}
+
+#txt_message, #btn_send {
+	
+	padding: 5px;
+	font-size: 20px;
+	
+}
+
+#txt_message {
+	
+	width: 60%;
+	
+}
+
+#host_actions {
+	
+	margin: 10px;
+	
+}
+
+#end_session {
+	
+	color: darkred;
+	
+}
+
+#kick_user {
+	
+	color: FFB300;
+	
+}
+
+#invite_user {
+	
+	color: green;
+	
+}
+
+#rename_session {
+	
+	color: darkorange;
+	
+}
+
+#switch_hosts {
+	
+	color: 0041B0;
+	
+}
+
+#event_area {
+	
+	max-width: 30%;
+	min-width: 30%;
+	min-height: 80%;
+	overflow: scroll;
+	
+}
+
+.hideAction {
+	
+	cursor: pointer;
+	
+}
+
+#welcome, .joined, .leave {
+	
+	background-color: darkgrey;
+	color: white;
+	font-size: 15px;
+	padding: 5px;
+	
+}
+
+
+
+.msg_wrapper {
+	
+	margin: 15px;
+	border-bottom: 1px solid black;
+	
+	padding-bottom: 15px;
+}
+
+.time_posted {
+	
+	color: FF6A00;
+	
+}
+
+.time_posted_grey {
+	
+	color: black;
+	
+}
+
+.msg_username {
+	
+	color: blue;
+	font-weight: bold;
+	
+}
+
+.message {
+	
+	margin-left: 30px;
+	
+	
+}
+
+.notification {
+	
+	background-color: darkgrey;
+	color: white;
+	font-size: 15px;
+	padding: 5px;
+	
+}
+
+.end {
+	
+	background-color: darkred;
+	color: white;
+	font-size: 15px;
+	padding: 5px;
+	
+}
+
+
+
