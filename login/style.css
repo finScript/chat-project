@@ -11,3 +11,73 @@
 	opacity: 0.4;
 	
 }
+
+.u_inp {
+	
+	width: 300px;
+	padding: 3px;
+	
+}
+
+.login_button {
+	
+	font-size: 16px;
+	font-family: Noto Sans;
+	
+	width: 150px;
+	padding-right: 10px;
+	padding-left: 10px;
+	
+	color: white;
+	background-color: 00C2ED;
+	border: 2px solid 0098BA;
+	
+}
+
+.cancel_button {
+	
+	font-size: 16px;
+	font-family: Noto Sans;
+	
+	width: 146px;
+	padding-right: 10px;
+	padding-left: 10px;
+	
+	color: white;
+	background-color: red;
+	border: 2px solid C70000;
+	
+}
+
+.login_button:hover {
+	
+	background-color: 0098BA;
+	
+}
+
+.cancel_button:hover {
+	
+	background-color: C70000;
+	
+}
+
+#wrapper {
+	
+	margin-left: 30px;
+	margin-top: 30px;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

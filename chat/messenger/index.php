@@ -88,6 +88,27 @@
 		
 		<input type="hidden" id="hidden_username" value="<?php echo $user->username; ?>" />
 		
+		<div id="request">
+			
+			<div class="request_wrapper">
+				<span style="font-size: 30px;">Joining request</span>
+				<br />
+				<br />
+				<span style="font-weight: bold;">USERNAME</span> has requested joining to your chat room.<br />
+				<img src="../img/validicon.png" width="20" height="20" style="vertical-align: -4px;" /><a href="" onclick="acceptRequest()">Accept Request</a>
+				<img src="../img/invalidicon.png" width="20" height="20" style="vertical-align: -4px;" /><a href="declineRequest()">Decline Request</a>
+			</div>
+			<hr color="black">
+			<div class="request_wrapper" style="margin-top: 30px;">
+				<span style="font-size: 30px;">Joining request</span>
+				<br />
+				<br />
+				<span style="font-weight: bold;">USERNAME</span> has requested joining to your chat room.<br />
+				<img src="../img/validicon.png" width="20" height="20" style="vertical-align: -4px;" /><a href="" onclick="acceptRequest()">Accept Request</a>
+				<img src="../img/invalidicon.png" width="20" height="20" style="vertical-align: -4px;" /><a href="declineRequest()">Decline Request</a>
+			</div>
+			
+		</div>
 		
 		<p id="top_bar">Logged in as <b><?php echo $user->username; ?></b> (<a href='../../logout'>Log out</a>)
 			 | 

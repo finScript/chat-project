@@ -4,6 +4,7 @@
 	session_start();
 	if(!isset($_SESSION['user'], $_POST['host'])) die();
 	
+	require "UserClass.php";
 	$user = unserialize($_SESSION['user']);
 	
 	$db = new mysqli('localhost', 'root', '', 'chat');

@@ -6,6 +6,13 @@ function _(el) {
 
 var xmlHttp;
 
+function trackTime() {
+	
+	_("cur_time").innerHTML = getT();
+	setTimeout("trackTime()", 1000);
+	
+}
+
 function login() {
 	
 	var username = encodeURIComponent(_("txt_username_email").value);

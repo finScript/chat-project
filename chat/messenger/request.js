@@ -37,7 +37,7 @@ function sendRequest() {
 		
 		if(xhr.readyState == 4 && xhr.status == 200) {
 			
-			response = xhr.requestText;
+			response = xhr.responseText;
 			if(response != null) {
 				
 				if(response == "0") {
@@ -45,6 +45,16 @@ function sendRequest() {
 					setTimeout(function() {
 						
 						$("#result").slideDown("fast");
+						setTimeout(function(){
+							
+							$("#confirm").animate({
+								
+								"height": "toggle",
+								"width" : "toggle"
+								
+							});
+							
+						}, 1000);
 						$("#loader").fadeOut(500);
 						
 					}, 1000);

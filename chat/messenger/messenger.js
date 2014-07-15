@@ -8,6 +8,7 @@ var global_time;
 var millisec = 0;
 var msg_array = [];
 var event_array = [];
+var request_array = [];
 
 
 var allowed = true;
@@ -334,6 +335,32 @@ function addToEvents(user, ev, occurred) {
 	
 }
 
+function addToRequests(username) {
+	
+	if(request_array == null || request_array.length == 0 || request_array == undefined) {
+		
+		request_array = [
+			
+			{
+				
+				"user":username
+				
+			}
+			
+		];
+		
+	} else {
+		
+		request_array.push({
+			
+			"user":username
+			
+		});
+		
+	}
+	
+}
+
 
 function handleResponses(resp) {
 	
@@ -350,9 +377,23 @@ function handleResponses(resp) {
 		
 	}
 	
+	if(resp.getElementsByTagName("requests").length != 0) {
+		
+		var request_count = resp.getElementsByTagName("request_count")[0].childNodes[0].nodeValue;
+		for(var i = 0; i < request_count; i++) {
+			
+			var u = resp.getElementsByTagName("request_user" + i)[0].childNodes[0].nodeValue;
+			addToRequests(u);
+			
+		}
+		
+	}
+	
 	try {
+		
 		var event_count = resp.getElementsByTagName("event_count")[0].childNodes[0].nodeValue;
 		var message_count = resp.getElementsByTagName("message_count")[0].childNodes[0].nodeValue;
+		
 	} catch(ex) {
 		__("could not get event_count or message_count");
 	}
@@ -400,6 +441,7 @@ function handleResponses(resp) {
 	
 	emptyMessages();
 	emptyEvents();
+	emptyRequests();
 	
 }
 
@@ -443,6 +485,21 @@ function emptyEvents() {
 	
 }
 
+function emptyRequests() {
+	
+	if(request_array.length == 0 || request_array == undefined || request_array == null) return;
+	
+	for(var i = 0; i < request_array.length; i++) {
+		
+		var u = event_array[i].username;
+		
+		
+	}
+	
+	event_array = [];
+	
+}
+
 var limit = 50;
 var entry_count = 0;
 
@@ -459,6 +516,30 @@ function __(txt) {
 	
 	entry_count++;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
