@@ -2,12 +2,15 @@
 	
 	session_start();
 	
+	if(isset($_SESSION['user'])) header("location: ../");
+	
 ?>
 
 <html>
 	
 	<head>
 		<script type="text/javascript" src="../jquery.js"></script>
+		<script type="text/javascript" src="../chat/time.js"></script>
 		<script type="text/javascript" src="register.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="../global_style.css" />
@@ -16,46 +19,63 @@
 		
 	</head>
 	
-	<body onload="hideLoaders();">
+	<body onload="hideLoaders(); trackTime();">
 		
 		<div id="register_success"><p id="lbl_login_success">Registration Successfull!<img src="../login/loader.gif" width="100" height="100" style="vertical-align: -25px;margin-left: 20px;" /></p></div>
 		
-		<label>
+		<div id="top_bar">
 			
-			Username:<br />
-			<input type="text" id="txt_username" />
+			<a href="../login">Log In</a>
+			|
+			<img src="../chat/img/calendar.png" width="20" height="20" style="vertical-align: -4px;" />&nbsp;<span id="cur_time"></span>
 			
-		</label>
-		<br />
-		<label>
+		</div>
+		
+		<h1>Register</h1>
+		
+		<hr>
+		
+		<div id="wrapper">
+		
+			<label>
+				
+				Username:<br />
+				<input class="u_inp" type="text" id="txt_username" />
+				
+			</label>
+			<br />
+			<label>
+				
+				Password:<br />
+				<input class="u_inp" type="password" id="txt_pwd" />
+				
+			</label>
+			<br />
+			<label>
+				
+				Repeat Password:<br />
+				<input class="u_inp" type="password" id="txt_pwd_rep" />
+				
+			</label>
+			<br />
+			<label>
+				
+				Full Name:<br />
+				<input class="u_inp" type="text" id="txt_fullname"  />
+				
+			</label>
+			<br />
+			<label>
+				
+				Email Address:<br />
+				<input class="u_inp" type="text" id="txt_email" />
+				
+			</label>
+			<br />
+			<button class="cancel_button" onclick="window.location = '..'">Cancel</button>
+			<button class="login_button" type="button" onclick="register()">Register</button>
 			
-			Password:<br />
-			<input type="password" id="txt_pwd" />
-			
-		</label>
-		<br />
-		<label>
-			
-			Repeat Password:<br />
-			<input type="password" id="txt_pwd_rep" />
-			
-		</label>
-		<br />
-		<label>
-			
-			Full Name:<br />
-			<input type="text" id="txt_fullname"  />
-			
-		</label>
-		<br />
-		<label>
-			
-			Email Address:<br />
-			<input type="text" id="txt_email" />
-			
-		</label>
-		<br />
-		<button id="registration_button" onclick="register()" type="button">Register</button>
+		</div>
 		
 		
 	</body>

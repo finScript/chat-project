@@ -4,6 +4,13 @@ function _(el) {
 
 var xmlHttp;
 
+function trackTime() {
+	
+	_("cur_time").innerHTML = getT();
+	setTimeout("trackTime()", 1000);
+	
+}
+
 function register() {
 	
 	try {
