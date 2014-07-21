@@ -41,6 +41,15 @@
 				
 			}
 			
+			?>
+			
+			<h1>Home</h1>
+			<hr>
+			
+			<div id="wrapper">
+			
+			<?php
+			
 			if(isset($_SESSION['user'])) {
 				
 				echo "<div id='invites'>";
@@ -48,6 +57,9 @@
 				$sql = "SELECT * FROM invites WHERE username = '" . $user->username . "'";
 				$db = new mysqli('localhost', 'root', '', 'chat');
 				$res = $db->query($sql);
+				
+				echo "<h3>Invitations:</h3>";
+				
 				if($res->num_rows) {
 					
 					
@@ -101,64 +113,76 @@
 					
 					
 					
-				} else {
+				} else echo "You have not been invited to any chat sessions.";
+				
+				
+				$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "'";
+				$res = $db->query($sql);
+				
+				echo "<h3>Hostings:</h3>";
 					
-					echo "You have not been invited to any chat sessions.";
+				if($res->num_rows) {
 					
-					$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "'";
-					$res = $db->query($sql);
-					
-					if($res->num_rows) {
-						
-						while($row = $res->fetch_object()) {
+					while($row = $res->fetch_object()) {
+						echo "You are hosting the following session: <b>";
+						echo $row->name . " (
 							
-							echo "<br />You are hosting the following session: <b>" . $row->name . " (<a href='chat/messenger/'>" . $user->access_to . "</a>)</b>";
+							<a href='chat/messenger/'><img src='chat/img/arrow_right.png' width='20' height='20' style='vertical-align:-4px;' /></a>
+							<a href='chat/messenger/delete.php'><img src='chat/img/invalidicon.png' width='20' height='20' style='vertical-align:-4px;' /></a>
 							
-						}
-						
-					} else {
-						
-						echo "<br />You are no hosting any session.";
-						
-						$sql = "SELECT * FROM participants WHERE username = '" . $user->username . "'";
-						$res = $db->query($sql);
-						
-						if($res->num_rows) {
 							
-							while($row = $res->fetch_object()) {
-								
-								echo "<br />You are participating to following chat session: <b>";
-								
-								$sql_2 = "SELECT * FROM active_chats WHERE chatkey = '" . $row->chatkey . "'";
-								$res_2 = $db->query($sql_2);
-								
-								while($row_2 = $res_2->fetch_object()) {
-									
-									echo $row_2->name . " (" . $row_2->chatkey . ")";
-									
-								}
-								
-								echo "</b>";
-								
-							}
-							
-						} else {
-							
-							echo "<br />You are not participating to any chat session.";
-							
-						}
+						)</b>";
 						
 					}
 					
-				}
+				} else echo "You are not hosting any session.";
+				
+				$sql = "SELECT * FROM participants WHERE username = '" . $user->username . "'";
+				$res = $db->query($sql);
+				
+				echo "<h3>Participations:</h3>";
+				
+				if($res->num_rows) {
+					
+					while($row = $res->fetch_object()) {
+						
+						echo "You are participating to following chat session: <b>";
+						
+						$sql_2 = "SELECT * FROM active_chats WHERE chatkey = '" . $row->chatkey . "'";
+						$res_2 = $db->query($sql_2);
+						
+						while($row_2 = $res_2->fetch_object()) {
+							
+							echo $row_2->name . " (
+								
+								<a href='chat/messenger/'><img src='chat/img/arrow_right.png' width='20' height='20' style='vertical-align:-4px;' /></a>
+								<a href='chat/messenger/delete.php'><img src='chat/img/invalidicon.png' width='20' height='20' style='vertical-align:-4px;' /></a>
+								
+								
+							)";
+							
+						}
+						
+						echo "</b>";
+						
+					}
+					
+				} else echo "You are not participating to any chat session.";
+				
 				echo "</div>";
 			
+			} else {
+				?>
+				
+				<p>You have not logged in.</p>
+				
+				<?php
 			}
 		
 		
 		?>
 	
-		
+		</div>
 		
 	</body>
 

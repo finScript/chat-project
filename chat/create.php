@@ -110,6 +110,9 @@
 						
 						}
 						
+						$sql = "INSERT INTO participants(chatkey, username) VALUES ('$sessionkey', '$host')";
+						$db->query($sql);
+						
 						$user->access_to = $sessionkey;
 						$_SESSION['user'] = serialize($user);
 						
