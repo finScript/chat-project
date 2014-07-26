@@ -9,7 +9,8 @@
 	
 	$key = $_POST['key'];
 	
-	$db = new mysqli('localhost', 'root', '', 'chat');
+	include('../../info.php');
+$db = new mysqli(_host, _user, _pass, _dbname);
 	
 	if($res = $db->query("SELECT * FROM active_chats WHERE host = '" . $user->username . "'")) {
 		

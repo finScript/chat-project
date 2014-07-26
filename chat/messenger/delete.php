@@ -60,7 +60,8 @@
 			<?php
 				
 				$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "'";
-				$db = new mysqli('localhost', 'root', '', 'chat');
+				include('../../info.php');
+$db = new mysqli(_host, _user, _pass, _dbname);
 				
 				if($res = $db->query($sql)) {
 					

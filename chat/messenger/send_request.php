@@ -7,7 +7,8 @@
 	require "UserClass.php";
 	$user = unserialize($_SESSION['user']);
 	
-	$db = new mysqli('localhost', 'root', '', 'chat');
+	include('../../info.php');
+$db = new mysqli(_host, _user, _pass, _dbname);
 	
 	$sql = "SELECT * FROM participants WHERE username = '" . $user->username . "'";
 	

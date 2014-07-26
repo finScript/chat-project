@@ -10,7 +10,8 @@
 	
 	if(!isset($_SESSION['user'], $_GET['n'], $_GET['t'])) die("vars not set");
 	$user = unserialize($_SESSION['user']);
-	$db = new mysqli('localhost', 'root', '', 'chat');
+	include('../../info.php');
+$db = new mysqli(_host, _user, _pass, _dbname);
 	
 	$new_name = $_GET['n'];
 	$chatkey = $user->access_to;

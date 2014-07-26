@@ -8,7 +8,8 @@
 	$t = $_POST['t'];
 	$kick_user = $_POST['u'];
 	
-	$db = new mysqli('localhost', 'root', '', 'chat');
+	include('../../info.php');
+$db = new mysqli(_host, _user, _pass, _dbname);
 	$user = unserialize($_SESSION['user']);
 	$chatkey = $user->access_to;
 	

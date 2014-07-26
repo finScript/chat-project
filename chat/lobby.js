@@ -143,14 +143,14 @@ function refreshSessions() {
 								if(session_host != getUsername()) {
 									
 									enter_img = "<img src='img/arrow_right.png' width='20' height='20' style='vertical-align:-5px' />";
-									_("session_table").innerHTML += "<tr><td>" + session_name + "</td><td>" + session_host + "</td><td>" + (parseInt(session_p) + 1) + "</td><td class='centered'><a href='messenger/request.php?host=" + session_host + "'>" + enter_img + "</a></td></tr>";
+									_("session_table").innerHTML += "<tr><td>" + session_name + "</td><td>" + session_host + "</td><td>" + (parseInt(session_p)) + "</td><td class='centered'><a href='messenger/request.php?host=" + session_host + "'>" + enter_img + "</a></td></tr>";
 								
 								} else {
 									
 									delete_img = "<img src='img/invalidicon.png' width='20' height='20' style='vertical-align:-5px' />";
 									enter_img = "<img src='img/arrow_right.png' width='20' height='20' style='vertical-align:-5px' />";
 									
-									_("session_table").innerHTML += "<tr><td>" + session_name + "</td><td><b style='color:green'>You</b></td><td>" + (parseInt(session_p) + 1) + "</td><td class='centered'><a href='messenger/delete.php'>" + delete_img + "</a>&nbsp;&nbsp;<a href='messenger/request.php?host=" + session_host + "'>" + enter_img + "</a></td></tr>";
+									_("session_table").innerHTML += "<tr><td>" + session_name + "</td><td><b style='color:green'>You</b></td><td>" + (parseInt(session_p)) + "</td><td class='centered'><a href='messenger/delete.php'>" + delete_img + "</a>&nbsp;&nbsp;<a href='messenger/request.php?host=" + session_host + "'>" + enter_img + "</a></td></tr>";
 									
 								}
 								

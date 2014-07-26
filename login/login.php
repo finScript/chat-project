@@ -13,7 +13,8 @@
 	$client_username = $_POST['username'];
 	$client_password = $_POST['password'];
 	
-	$db = new mysqli('localhost', 'root', '', 'user_data');
+	include('../info.php');
+	$db = new mysqli(_host, _user, _pass, _dbname);
 	
 	$sql = "SELECT * FROM users_waiting WHERE username = '$client_username' OR email = '$client_username'";
 	

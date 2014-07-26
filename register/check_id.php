@@ -9,7 +9,8 @@
 	else die();
 	
 	
-	$db = new mysqli('localhost', 'root', '', 'user_data');
+	include("info.php");
+$db = new mysqli(_host, _user, _pass, _dbname);
 	
 	if($action == "u") {
 		

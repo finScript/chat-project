@@ -29,7 +29,8 @@
 	
 	
 	$user = unserialize($_SESSION['user']);
-	$db = new mysqli('localhost', 'root', '', 'chat');
+	include('../../info.php');
+$db = new mysqli(_host, _user, _pass, _dbname);
 	
 	$sql = "SELECT * FROM events WHERE username = '" . $user->username . "' AND event_id = 1 AND chatkey = '" . $user->access_to . "'";
 	if($res = $db->query($sql)) {

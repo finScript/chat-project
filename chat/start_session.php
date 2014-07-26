@@ -16,7 +16,9 @@
 	require "UserClass.php";
 	
 	$user = unserialize($_SESSION['user']);
-	$db_user = new mysqli('localhost', 'root', '', 'user_data');
+	
+	include('../info.php');
+	$db_user = new mysqli(_host, _user, _pass, _dbname);
 	$sessionkey = $user->sessionkey;
 
 	$q = $_GET['q'];

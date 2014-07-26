@@ -55,7 +55,8 @@
 				echo "<div id='invites'>";
 				
 				$sql = "SELECT * FROM invites WHERE username = '" . $user->username . "'";
-				$db = new mysqli('localhost', 'root', '', 'chat');
+				include("info.php");
+				$db = new mysqli(_host, _user, _pass, _dbname);
 				$res = $db->query($sql);
 				
 				echo "<h3>Invitations:</h3>";

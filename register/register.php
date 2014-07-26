@@ -1,5 +1,5 @@
 <?php
-	
+	include("../info.php");
 	session_start();
 	if(isset($_SESSION['user'])) die('Other session running!');
 	header("Content-type: text/xml");
@@ -13,7 +13,7 @@
 	$client_fullname = $_POST['fullname'];
 	$client_email = $_POST['email'];
 	
-	$db = new mysqli('localhost', 'root', '', 'user_data');
+	$db = new mysqli(_host, _user, _pass, _dbname);
 	
 	$sql = "SELECT * FROM users_waiting WHERE username = '$client_username' OR email = '$client_email'";
 	
