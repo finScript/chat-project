@@ -85,7 +85,7 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 		
 	</head>
 	
-	<body onload="trackTime(); inpSendText(1); hideLoaders();setTimeout('handleMessages();', p_intervall);">
+	<body onload="trackTime(); inpSendText(1); hideLoaders(); setTimeout('handleMessages();', p_intervall);">
 		
 		<input type="hidden" id="hidden_username" value="<?php echo $user->username; ?>" />
 		

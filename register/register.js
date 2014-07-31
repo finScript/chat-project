@@ -81,7 +81,7 @@ function checkUsername() {
 	try {
 	
 		var u = _("txt_username").value;
-		var letters = /^[a-zA-Z0-9_ -]+$/;
+		var letters = /^[a-zA-Z0-9_ -.]+$/;
 		
 		if(u.length >= 6) {
 			

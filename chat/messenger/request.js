@@ -14,6 +14,7 @@ function _(el) {
 function hideLoaders() {
 	
 	$("#loader,#result").hide();
+	$("#request").hide();
 	
 }
 

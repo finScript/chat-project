@@ -99,8 +99,6 @@
 						
 						echo "<tr>";
 							
-							
-							
 							echo "<td>" . $session_name . "</td>";
 							echo "<td>" . $session_host . "</td>";
 							echo "<td>" . $session_participants . "</td>";
@@ -110,11 +108,11 @@
 						
 					}
 					
-					echo "</table>";
+					echo "</table><br/><br/><hr>";
 					
 					
 					
-				} else echo "You have not been invited to any chat sessions.";
+				} else echo "You have not been invited to any chat sessions.<br/><br/><hr>";
 				
 				
 				$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "'";
@@ -132,11 +130,11 @@
 							<a href='chat/messenger/delete.php'><img src='chat/img/invalidicon.png' width='20' height='20' style='vertical-align:-4px;' /></a>
 							
 							
-						)</b>";
+						)</b><br/><br/><hr>";
 						
 					}
 					
-				} else echo "You are not hosting any session.";
+				} else echo "You are not hosting any session.<br/><br/><hr>";
 				
 				$sql = "SELECT * FROM participants WHERE username = '" . $user->username . "'";
 				$res = $db->query($sql);

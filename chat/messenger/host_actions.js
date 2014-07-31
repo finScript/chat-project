@@ -73,7 +73,7 @@ function hideLoaders() {
 	}
 	
 	$("#request").hide();
-	setTimeout('$("#request").slideDown();', 1000);
+	//setTimeout('$("#request").slideDown();', 1000);
 	
 }
 
