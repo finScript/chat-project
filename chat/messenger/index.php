@@ -14,11 +14,15 @@
 	$_SESSION['latest_m'] = 0;
 	$_SESSION['latest_r'] = 0;
 	
-	
 	$user = unserialize($_SESSION['user']);
-	
 	include('../../info.php');
 	$db = new mysqli(_host, _user, _pass, _dbname);
+	if(!isset($user->access_to)) {
+		header("location: access_to.php?k=" . getKey($db, $user));
+		die();
+	}
+	
+	
 	
 	function getKey($database, $u) {
 		
@@ -363,9 +367,11 @@
 				<button onclick="sendMessage()" type="button" id="btn_send">Send</button>
 				
 			</div>
-			<button onclick="testFunc()" type="button">Test</button>
-			<input type="checkbox" onchange="setAllowed();" id="debug_enabled" checked /><label id="allowcheckbox" for="debug_enabled">enabled</label>
-			<span id="output"></span>
+			<div id="dev_area" style="display:none;">
+				<button onclick="testFunc()" type="button">Test</button>
+				<input type="checkbox" onchange="setAllowed();" id="debug_enabled" checked /><label id="allowcheckbox" for="debug_enabled">enabled</label>
+				<span id="output"></span>
+			</div>
 			
 		</div>
 		
