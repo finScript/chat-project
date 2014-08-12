@@ -28,7 +28,8 @@
 	
 	<head>
 		
-		<link rel="stylesheet" type="text/css" href="/global_style.css" />
+		<title>'<?php echo $sessionname; ?>' Requests</title>
+		<link rel="stylesheet" type="text/css" href="../../../global_style.css" />
 		<script type="text/javascript" src="handle_request.js"></script>
 		<script type="text/javascript" src="../../time.js"></script>
 		<script type="text/javascript" src="/jquery.js"></script>
@@ -52,50 +53,56 @@
 		
 		<p style="font-size: 20px;">Requests:</p>
 		
-		<table id="request_table" cellpadding="5" border="1" style="margin-left: 30px; border-spacing: 0px;">
-			<tr>
+		<?php
+			$sql = "SELECT * FROM requests WHERE chatkey_to = '" . $user->access_to . "'";
+			$res = $db->query($sql);
+			
+			if($res->num_rows) {
+				
+				echo '<table id="request_table" cellpadding="5" border="1" style="margin-left: 30px; border-spacing: 0px;">';
+				
+				echo '
+				<tr>
 				<th>From</th>
 				<th>Request ID</th>
 				<th></th>
 				<th></th>
-			</tr>
-			<?php
-				$sql = "SELECT * FROM requests WHERE chatkey_to = '" . $user->access_to . "'";
-				$res = $db->query($sql);
+				</tr>';
 				
-				if($res->num_rows) {
-					$count = 0;
-					while($row = $res->fetch_object()) {
-						echo "<input type='hidden' id='req_user$count' value='" . $row->user_from . "' />";
-						echo "<tr id='req$count'>";
-							
-							echo "<td>" . $row->user_from . "</td>";
-							echo "<td>" . $row->request_id . "</td>";
-							echo "
-							<td>
-								<a href='' onclick='event.preventDefault(); accept($count);'>
-								<img src='../../img/validicon.png' widht='20' height='20' style='vertical-align:-4px;' />
-								<span style='color: green;'>Accept</span>
-								</a>
-							</td>";
-							echo "
-							<td>
-								<a href='' onclick='event.preventDefault(); decline($count);'>
-								<img src='../../img/invalidicon.png' widht='20' height='20' style='vertical-align:-4px;' />
-								<span style='color: darkred;'>Decline</span>
-								</a>
-							</td>";
-							
-						echo "</tr>";
+				$count = 0;
+				while($row = $res->fetch_object()) {
+					echo "<input type='hidden' id='req_user$count' value='" . $row->user_from . "' />";
+					echo "<tr id='req$count'>";
 						
-						$count++;
+						echo "<td>" . $row->user_from . "</td>";
+						echo "<td>" . $row->request_id . "</td>";
+						echo "
+						<td>
+							<a href='' onclick='event.preventDefault(); accept($count);'>
+							<img src='../../img/validicon.png' widht='20' height='20' style='vertical-align:-4px;' />
+							<span style='color: green;'>Accept</span>
+							</a>
+						</td>";
+						echo "
+						<td>
+							<a href='' onclick='event.preventDefault(); decline($count);'>
+							<img src='../../img/invalidicon.png' widht='20' height='20' style='vertical-align:-4px;' />
+							<span style='color: darkred;'>Decline</span>
+							</a>
+						</td>";
 						
-					}
+					echo "</tr>";
 					
-				} else echo "No requests!";
+					$count++;
+					
+				}
 				
-			?>
-		</table>
+				echo "</table>";
+				
+			} else echo "<div style='margin-left: 30px;'>No requests!</div>";
+			
+		?>
+		
 		
 	</body>
 	

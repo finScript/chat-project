@@ -103,17 +103,17 @@
 		
 		<div id="request">
 			
-			<div class="request_wrapper">
-				<span style="font-size: 30px;">New Joining request(s)</span>
+			<div id="request_wrapper">
+				<span style="font-size: 30px;">There are <span id="num_req">0</span> joining requests waiting for handling.</span>
 				<br />
-				<a href="requests">Handle Requests</a> | <a href="" onclick="event.preventDefault(); $('request_wrapper').slideUp();">Handle Later</a>
+				<a href="requests">Handle Requests</a> | <a href="" onclick="event.preventDefault(); $('#request').slideUp();">Hide</a>
 			</div>
 			
 		</div>
 		
 		<p id="top_bar">Logged in as <b><?php echo $user->username; ?></b> (<a href='../../logout'>Log out</a>)
 			|
-			<a href="/">Home</a>
+			<a href="../../">Home</a>
 			|
 			<a href="..">Lobby</a>
 			|
@@ -167,6 +167,13 @@
 							
 							<img src="../img/inviteicon.png" width="25" height="25" style="vertical-align: -7px;" />
 							Invite User
+							
+						</a>
+						|
+						<a href="requests" id="invite_user" target="_blank" style="color: ">
+							
+							<img src="../img/requests.png" width="25" height="25" style="vertical-align: -7px;" />
+							See Requests
 							
 						</a>
 						|

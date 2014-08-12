@@ -342,28 +342,14 @@ function addToEvents(user, ev, occurred) {
 	
 }
 
-function addToRequests(username) {
+var latest_req_num = 0;
+
+function addToRequests(num_req) {
 	
-	if(request_array == null || request_array.length == 0 || request_array == undefined) {
-		
-		request_array = [
-			
-			{
-				
-				"user":username
-				
-			}
-			
-		];
-		
-	} else {
-		
-		request_array.push({
-			
-			"user":username
-			
-		});
-		
+	if(num_req > latest_req_num) {
+		_("num_req").innerHTML = num_req;
+		$("#request").slideDown();
+		latest_num_req = num_req;
 	}
 	
 }
@@ -384,17 +370,13 @@ function handleResponses(resp) {
 		
 	}
 	
-	if(resp.getElementsByTagName("requests").length != 0) {
+	if(resp.getElementsByTagName("request_count").length != 0) {
 		
 		var request_count = resp.getElementsByTagName("request_count")[0].childNodes[0].nodeValue;
-		for(var i = 0; i < request_count; i++) {
-			
-			var u = resp.getElementsByTagName("request_user" + i)[0].childNodes[0].nodeValue;
-			addToRequests(u);
-			
-		}
+		//alert("Reqs");
+		addToRequests(request_count);
 		
-	}
+	} //else alert("No reqs");
 	
 	try {
 		

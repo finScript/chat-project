@@ -20,7 +20,9 @@
 		$u = $_POST['u'];
 		$sql = "SELECT * FROM participants WHERE username = '" . $u . "'";
 		$res = $db->query($sql);
-		$u_chatkey = $res->fetch_object()->chatkey;
+		if($res->num_rows)
+			$u_chatkey = $res->fetch_object()->chatkey;
+		else $u_chatkey = "000";
 		
 		if($res->num_rows) {
 			

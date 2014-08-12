@@ -19,7 +19,7 @@
 	
 	if($db->query($sql)->num_rows) {
 		
-		header("location: /chat/messenger");
+		header("location: ../messenger");
 		die();
 		
 	}
@@ -54,7 +54,7 @@
 		$sql = "INSERT INTO events(event_id, chatkey, username, occurred) VALUES (3, '" . $sessionkey . "', '" . $user->username . "', '" . $t . "')";
 		$db->query($sql);
 		
-		header("location: /chat/messenger");
+		header("location: ../messenger");
 		
 		die();
 		
@@ -64,7 +64,7 @@
 	
 	if($db->query($sql)->num_rows) {
 		
-		header("location: /chat/messenger");
+		header("location: ../messenger");
 		die();
 		
 	}
