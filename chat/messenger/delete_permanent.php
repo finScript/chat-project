@@ -28,6 +28,9 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 			$sql = "DELETE FROM messages WHERE chatkey = '$key'";
 			$db->query($sql);
 			
+			$sql = "DELETE FROM events WHERE chatkey = '$key'";
+			$db->query($sql);
+			
 			echo "0";
 			
 		} else {

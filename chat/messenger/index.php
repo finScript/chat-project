@@ -12,12 +12,13 @@
 	
 	$_SESSION['latest_e'] = 0;
 	$_SESSION['latest_m'] = 0;
+	$_SESSION['latest_r'] = 0;
 	
 	
 	$user = unserialize($_SESSION['user']);
 	
 	include('../../info.php');
-$db = new mysqli(_host, _user, _pass, _dbname);
+	$db = new mysqli(_host, _user, _pass, _dbname);
 	
 	function getKey($database, $u) {
 		
@@ -74,8 +75,15 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 	
 	<head>
 		
+		<title>
+			
+			Messenger - Chat Hole
+			
+		</title>
+		
 		<link rel="stylesheet" type="text/css" href="../../global_style.css" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="icon" type="image/png" href="../../ch.png" />
 		
 		<script type="text/javascript" src="messenger.js"></script>
 		<script type="text/javascript" src="host_actions.js"></script>
@@ -87,32 +95,28 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 	
 	<body onload="trackTime(); inpSendText(1); hideLoaders(); setTimeout('handleMessages();', p_intervall);">
 		
+		<audio id="notification">
+			<source src="audio/notification.wav" type="audio/wav">
+		</audio>
+		
 		<input type="hidden" id="hidden_username" value="<?php echo $user->username; ?>" />
 		
 		<div id="request">
 			
 			<div class="request_wrapper">
-				<span style="font-size: 30px;">Joining request</span>
+				<span style="font-size: 30px;">New Joining request(s)</span>
 				<br />
-				<br />
-				<span style="font-weight: bold;">USERNAME</span> has requested joining to your chat room.<br />
-				<img src="../img/validicon.png" width="20" height="20" style="vertical-align: -4px;" /><a href="" onclick="acceptRequest()">Accept Request</a>
-				<img src="../img/invalidicon.png" width="20" height="20" style="vertical-align: -4px;" /><a href="declineRequest()">Decline Request</a>
-			</div>
-			<hr color="black">
-			<div class="request_wrapper" style="margin-top: 30px;">
-				<span style="font-size: 30px;">Joining request</span>
-				<br />
-				<br />
-				<span style="font-weight: bold;">USERNAME</span> has requested joining to your chat room.<br />
-				<img src="../img/validicon.png" width="20" height="20" style="vertical-align: -4px;" /><a href="" onclick="acceptRequest()">Accept Request</a>
-				<img src="../img/invalidicon.png" width="20" height="20" style="vertical-align: -4px;" /><a href="declineRequest()">Decline Request</a>
+				<a href="requests">Handle Requests</a> | <a href="" onclick="event.preventDefault(); $('request_wrapper').slideUp();">Handle Later</a>
 			</div>
 			
 		</div>
 		
 		<p id="top_bar">Logged in as <b><?php echo $user->username; ?></b> (<a href='../../logout'>Log out</a>)
-			 | 
+			|
+			<a href="/">Home</a>
+			|
+			<a href="..">Lobby</a>
+			|
 			<img src="../img/calendar.png" width="20" height="20" style="vertical-align: -4px;" />&nbsp;<span id="cur_time"></span>
 			
 		</p>
@@ -348,7 +352,7 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 			
 			<div id="send_area">
 				
-				<input type="text" id="txt_message" autocomplete="off" onfocus="inpSendText(0);" onfocusout="inpSendText(1);" />
+				<input type="text" id="txt_message" autocomplete="off" onfocus="inpSendText(0);" onfocusout="inpSendText(1);" onkeyup="checkEnterSend(event);" />
 				<button onclick="sendMessage()" type="button" id="btn_send">Send</button>
 				
 			</div>

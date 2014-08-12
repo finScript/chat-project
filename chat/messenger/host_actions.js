@@ -198,7 +198,31 @@ function kickUser() {
 
 
 
-
+function inviteUser() {
+	
+	var u = _("txt_invite_user").value;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "invite.php", true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange = function() {
+		
+		if(xhr.readyState == 4 && xhr.status == 200) {
+			
+			resp = xhr.responseText;
+			if(resp != null) {
+				alert(resp);
+			} else alert("Response null!");
+			
+		}
+		
+	}
+	
+	var params = "u=" + encodeURIComponent(u) + "&t=" + encodeURIComponent(getT_only());
+	
+	xhr.send(params);
+	
+}
 
 
 

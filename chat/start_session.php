@@ -53,7 +53,9 @@
 <html>
 	
 	<head>
+		<title>Start New Chat Session</title>
 		<link rel="stylesheet" type="text/css" href="../global_style.css" />
+		<link rel="icon" type="image/png" href="../ch.png" />
 		<script type="text/javascript" src="start_session.js"></script>
 		<script type="text/javascript" src="time.js"></script>
 	</head>

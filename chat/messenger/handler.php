@@ -15,14 +15,16 @@
 	
 	_log("latest_e = " . $_SESSION['latest_e']);
 	_log("latest_m = " . $_SESSION['latest_m']);
+	_log("latest_r = " . $_SESSION['latest_r']);
 	
 	header("Content-type: text/xml");
 	if(!isset($_SESSION['user'])) die();
 	
-	if(!isset($_SESSION['latest_m'], $_SESSION['latest_e'])) {
+	if(!isset($_SESSION['latest_m'], $_SESSION['latest_e'], $_SESSION['latest_r'])) {
 		
 		$_SESSION['latest_e'] = 0;
 		$_SESSION['latest_m'] = 0;
+		$_SESSION['latest_r'] = 0;
 		
 	}
 	
@@ -30,7 +32,7 @@
 	
 	$user = unserialize($_SESSION['user']);
 	include('../../info.php');
-$db = new mysqli(_host, _user, _pass, _dbname);
+	$db = new mysqli(_host, _user, _pass, _dbname);
 	
 	$sql = "SELECT * FROM events WHERE username = '" . $user->username . "' AND event_id = 1 AND chatkey = '" . $user->access_to . "'";
 	if($res = $db->query($sql)) {
@@ -57,6 +59,7 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 		
 		$events = get_events($db, $user, $_SESSION['latest_e']);
 		$messages = get_messages($db, $user, $_SESSION['latest_m']);
+		$requests = get_requests($db, $user, $_SESSION['latest_r']);
 		
 		if($events == 0) {
 			
@@ -83,12 +86,25 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 		
 		}
 		
+		if($requests == 0) {
+			
+			_log("request count = 0");
+			echo "<request_count>0</request_count>";
+			
+		} else {
+			
+			echo handle_return_string('r', $requests, $user);
+			_log("request count = " . count($requests));
+		
+		}
+		
 	} else {
 		
 		_log("count is not set");
 		
 		$events = get_events($db, $user, $_SESSION['latest_e']);
 		$messages = get_messages($db, $user, $_SESSION['latest_m']);
+		$requests = get_requests($db, $user, $_SESSION['latest_r']);
 		
 		if($events == 0) {
 			
@@ -112,6 +128,18 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 			
 			echo handle_return_string('m', $messages);
 			_log("message count = " . count($messages));
+		
+		}
+		
+		if($requests == 0) {
+			
+			_log("request count = 0");
+			echo "<request_count>0</request_count>";
+			
+		} else {
+			
+			echo handle_return_string('r', $requests, $user);
+			_log("request count = " . count($requests));
 		
 		}
 		
@@ -172,6 +200,39 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 			
 		}
 
+	}
+	
+	function get_requests($_db, $_user, $latest) {
+		
+		$chatkey = $_user->access_to;
+		
+		$sql = "SELECT MAX(id) AS id FROM requests WHERE chatkey_to = '$chatkey'";
+		$max_id = $_db->query($sql)->fetch_object()->id;
+		
+		$sql = "SELECT * FROM requests WHERE chatkey_to = '$chatkey' AND id > $latest";
+		$res = $_db->query($sql);
+		
+		if($res->num_rows) {
+			
+			$requests = [];
+			
+			while($row = $res->fetch_object()) {
+				
+				array_push($requests, [
+					
+					"user_from" => $row->user_from,
+					"request_id" => $row->request_id,
+					
+				]);
+				
+				
+			}
+			
+			$_SESSION['latest_r'] = $max_id;
+			return $requests;
+			
+		} else return 0;
+		
 	}
 	
 	function get_messages($_db, $_user, $latest) {
@@ -287,7 +348,7 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 			
 			return "<event_count>" . $count . "</event_count>" . $r;
 			
-		} else {
+		} elseif($action == 'm') {
 			
 			$count = 0;
 			foreach($arr as $message) {
@@ -305,6 +366,16 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 			}
 			
 			return "<message_count>" . $count . "</message_count>" . $r;
+			
+		} elseif($action == 'r') {
+			
+			$count = 0;
+			foreach($arr as $request) {
+				
+				$count++;
+				
+			}
+			return "<request_count>" . $count . "</request_count>";
 			
 		}
 		

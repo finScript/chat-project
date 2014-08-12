@@ -7,10 +7,22 @@
 	require "UserClass.php";
 	
 	$user = unserialize($_SESSION['user']);
+	
+	$t = date('H') .":". date('i') .":". date('s');
+	
 	include('../../info.php');
-$db = new mysqli(_host, _user, _pass, _dbname);
+	$db = new mysqli(_host, _user, _pass, _dbname);
 	$sessionname;
 	$sessionkey;
+	
+	$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "' AND chatkey = '" . $user->access_to . "'";
+	
+	if($db->query($sql)->num_rows) {
+		
+		header("location: /chat/messenger");
+		die();
+		
+	}
 	
 	$sql = "SELECT * FROM active_chats WHERE host = '" . $_GET['host'] . "'";
 	if($res = $db->query($sql)) {
@@ -32,6 +44,30 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 		
 	} else echo "An error occurred: " . $db->error;
 	
+	$sql = "SELECT * FROM invites WHERE username = '" . $user->username . "' AND chatkey = '" . $sessionkey . "'";
+	if($db->query($sql)->num_rows) {
+		
+		$sql = "INSERT INTO participants(username, chatkey) VALUES ('" . $user->username . "', '" . $sessionkey . "')";
+		$db->query($sql);
+		$sql = "DELETE FROM invites WHERE username = '" . $user->username . "' AND chatkey = '" . $sessionkey . "'";
+		$db->query($sql);
+		$sql = "INSERT INTO events(event_id, chatkey, username, occurred) VALUES (3, '" . $sessionkey . "', '" . $user->username . "', '" . $t . "')";
+		$db->query($sql);
+		
+		header("location: /chat/messenger");
+		
+		die();
+		
+	}
+	
+	$sql = "SELECT * FROM participants WHERE username = '" . $user->username . "' AND chatkey = '" . $sessionkey . "'";
+	
+	if($db->query($sql)->num_rows) {
+		
+		header("location: /chat/messenger");
+		die();
+		
+	}
 ?>
 
 <html>
@@ -40,6 +76,8 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 		
 		<link rel="stylesheet" type="text/css" href="../../global_style.css" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="icon" type="image/png" href="../../ch.png" />
+		
 		
 		<script type="text/javascript" src="../time.js"></script>
 		<script type="text/javascript" src="request.js"></script>

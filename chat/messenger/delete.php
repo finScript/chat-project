@@ -18,6 +18,7 @@
 		<script type="text/javascript" src="../../jquery.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="../../global_style.css" />
+		<link rel="icon" type="image/png" href="../../ch.png" />
 		
 		<style>
 			

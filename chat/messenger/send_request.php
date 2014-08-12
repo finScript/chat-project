@@ -27,12 +27,12 @@ $db = new mysqli(_host, _user, _pass, _dbname);
 				if($res->num_rows) {
 				
 					$chatkey = $res->fetch_object()->chatkey;
-					$sql = "INSERT INTO requests(username, chatkey) VALUES ('" . $user->username . "', '$chatkey')";
+					$sql = "INSERT INTO requests(user_from, chatkey_to, request_id) VALUES ('" . $user->username . "', '$chatkey', '" . substr(md5(rand()), 0, 7) . "')";
 					if($res = $db->query($sql)) {
 						
 						echo "0";
 						
-					} else echo "3";
+					} else echo "DB error: " . $db->error;
 					
 				} else {
 				

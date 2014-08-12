@@ -205,14 +205,21 @@ function writeMessage(action, msg, username, time, date) {
 		
 	}
 	
-	if(action == "write")
+	if(action == "write") {
+		
 		_("msg_area").innerHTML += m;
-	else
+		
+	} else {
+		
 		_("event_area").innerHTML += m;
+		
+	}
 	
 	$('#msg_area').stop().animate({
 		scrollTop: $("#msg_area")[0].scrollHeight
 	}, 2000);
+	
+	if(username != _("hidden_username").value) _("notification").play();
 	
 }
 
@@ -231,7 +238,7 @@ function sendMessage() {
 	writeMessage('write', msg, username, time, date);
 	
 	_("txt_message").value = "";
-	inpSendText(1);
+	//inpSendText(1);
 	
 }
 
@@ -518,7 +525,15 @@ function __(txt) {
 }
 
 
-
+function checkEnterSend(e) {
+	
+	if(e.keyCode == 13) {
+		
+		sendMessage();
+		
+	}
+	
+}
 
 
 

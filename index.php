@@ -9,6 +9,7 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="global_style.css" />
 		<link rel="stylesheet" type="text/css" href="local_style.css" />
+		<link rel="icon" type="image/png" href="ch.png" />
 		
 		<script type="text/javascript" src="chat/time.js"></script>
 		<script type="text/javascript">
@@ -65,7 +66,7 @@
 					
 					
 					
-					echo "You have been invited to following chat rooms:";
+					echo "You have been invited to following chat sessions:";
 					
 					echo "<table cellpadding='10' border='1' id='invite_table'>";
 					
@@ -102,7 +103,7 @@
 							echo "<td>" . $session_name . "</td>";
 							echo "<td>" . $session_host . "</td>";
 							echo "<td>" . $session_participants . "</td>";
-							echo "<td class='centered'><a href='chat/messenger/'><b><a href='chat/?k=$chatkey'>" . $chatkey . "</a></b></a></td>";
+							echo "<td class='centered'><a href='chat/messenger/'><b><a href='chat/messenger/request.php?host=$session_host'>" . $chatkey . "</a></b></a></td>";
 							
 						echo "</tr>";
 						
