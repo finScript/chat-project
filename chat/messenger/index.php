@@ -99,9 +99,7 @@
 	
 	<body onload="trackTime(); inpSendText(1); hideLoaders(); setTimeout('handleMessages();', p_intervall);">
 		
-		<audio id="notification">
-			<source src="audio/notification.wav" type="audio/wav">
-		</audio>
+		<audio id="notification" src="audio/notification.wav" type="audio/wav"></audio>
 		
 		<input type="hidden" id="hidden_username" value="<?php echo $user->username; ?>" />
 		
@@ -109,6 +107,7 @@
 			
 			<div id="request_wrapper">
 				<span style="font-size: 30px;">There are <span id="num_req">0</span> joining requests waiting for handling.</span>
+				<br />
 				<br />
 				<a href="requests">Handle Requests</a> | <a href="" onclick="event.preventDefault(); $('#request').slideUp();">Hide</a>
 			</div>
