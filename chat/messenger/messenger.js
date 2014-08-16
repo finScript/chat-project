@@ -268,6 +268,9 @@ function testFunc() {
 		
 		
 	} else alert("undef");
+	
+	if(_("file_send").files.length == 0) alert("No files"); else alert(_("file_send").files[0].name);
+	
 }
 
 

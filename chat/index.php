@@ -47,7 +47,8 @@
 		
 		<div id="wrapper">
 			<h1>Chat Lobby</h1>
-			
+			<hr>
+			<br />
 			<div id="chat_enter">
 				
 				<label>

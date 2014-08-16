@@ -91,13 +91,14 @@
 		
 		<script type="text/javascript" src="messenger.js"></script>
 		<script type="text/javascript" src="host_actions.js"></script>
+		<script type="text/javascript" src="file_upload.js"></script>
 		<script type="text/javascript" src="../time.js"></script>
 		<script type="text/javascript" src="../../jquery.js"></script>
 		
 		
 	</head>
 	
-	<body onload="trackTime(); inpSendText(1); hideLoaders(); setTimeout('handleMessages();', p_intervall);">
+	<body onload="trackTime(); inpSendText(1); hideLoaders(); hideFileSelect(); setTimeout('handleMessages();', p_intervall);">
 		
 		<audio id="notification" src="audio/notification.wav" type="audio/wav"></audio>
 		
@@ -363,14 +364,23 @@
 			<div id="send_area">
 				
 				<input type="text" id="txt_message" autocomplete="off" onfocus="inpSendText(0);" onfocusout="inpSendText(1);" onkeyup="checkEnterSend(event);" />
-				<a href="" onclick="event.preventDefault()"><img src="../img/file_black.png" width="40" height="40" style="vertical-align: -12px" title="Send file" /></a>
+				<a href="" onclick="event.preventDefault();selectFile();"><img src="../img/file_black.png" width="40" height="40" style="vertical-align: -12px" title="Send file" /></a>
 				<button onclick="sendMessage()" type="button" id="btn_send">Send</button>
 				
 			</div>
-			<div id="dev_area" style="display:none;">
+			
+			<form id="fileform" name="fileform" enctype="multipart/form-data" method="POST">
+				
+				<input type="file" id="file_send" name="file_send" onchange="sendFile();" />
+				
+			</form>
+			
+			<div id="dev_area" style="">
 				<button onclick="testFunc()" type="button">Test</button>
 				<input type="checkbox" onchange="setAllowed();" id="debug_enabled" checked /><label id="allowcheckbox" for="debug_enabled">enabled</label>
 				<span id="output"></span>
+				<br />
+				<span id="loaded_n_total"></span>
 			</div>
 			
 		</div>
