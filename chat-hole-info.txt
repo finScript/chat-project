@@ -1,0 +1,13 @@
+$event_ids = [
+
+0 => "ended",
+1 => "kicked",
+2 => "invited",
+3 => "joined",
+4 => "renamed",
+5 => "host_switched",
+			
+];
+
+DB: 'localhost','root','','chat'
+check autodb.sql.zip for more

@@ -363,6 +363,7 @@
 			<div id="send_area">
 				
 				<input type="text" id="txt_message" autocomplete="off" onfocus="inpSendText(0);" onfocusout="inpSendText(1);" onkeyup="checkEnterSend(event);" />
+				<a href="" onclick="event.preventDefault()"><img src="../img/file_black.png" width="40" height="40" style="vertical-align: -12px" title="Send file" /></a>
 				<button onclick="sendMessage()" type="button" id="btn_send">Send</button>
 				
 			</div>
