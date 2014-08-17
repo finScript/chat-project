@@ -242,6 +242,7 @@ function writeMessage(action, msg, username, time, date, msg_type) {
 				msg_wrapper.appendChild(imgdiv);
 				
 				msg_area.appendChild(msg_wrapper);
+				resizeImg(img_id);
 				
 			} catch(ex) {
 				
@@ -250,11 +251,18 @@ function writeMessage(action, msg, username, time, date, msg_type) {
 			}
 			
 			m = "";
-			resizeImg(userimg);
+			
 			
 		} else if(msg_type == "file") {
 			
-			m = '<div class="msg_wrapper"><label class="msg_username">' + username + ':</label><br /><label class="message">' + timestring + '<a title="Download" class="userfile" href="files/' + msg + '" download>' + msg + '</a>' + '</label></div>';
+			m = '<div class="msg_wrapper">';
+			m += '<label class="msg_username">' + username + ':</label><br />';
+			m += '<label class="message">' + timestring;
+			m += '<div class="userfilewrapper">';
+			m += '<div class="userfile">';
+			m += '<img src="../img/download.png" width="20" height="20" style="vertical-align: -4px;" />&nbsp;';
+			m += '<a title="Download" href="files/' + msg + '" download>' + msg + '</a>';
+			m += '</div></div></label></div>';
 			
 		}
 		
@@ -584,28 +592,24 @@ function checkEnterSend(e) {
 
 function resizeImg(el) {
 	
-	try {
-		
-		w = el.clientWidth;
-		h = el.clientHeight;
-		
-		if(w > 500 && w < 1000) {
+	setTimeout(function() {
+	
+		try {
 			
-			el.setAttribute("width", w / 2);
-			el.setAttribute("height", h / 2);
+			msg_area_width = _("msg_area").clientWidth - 60;
+			img_width = _(el).clientWidth;
 			
-		} else if(w > 1000) {
+			if(img_width > msg_area_width) {
+				_(el).setAttribute("width", img_width / 2);
+			}
 			
-			el.setAttribute("width", w / 3);
-			el.setAttribute("height", h / 3);
+		} catch(ex) {
+			
+			alert(ex.toString());
 			
 		}
-		
-	} catch(ex) {
-		
-		alert(ex.toString());
-		
-	}
+	
+	}, 500);
 	
 }
 

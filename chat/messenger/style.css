@@ -168,12 +168,23 @@
 .userfile {
 	
 	color: blue;
+	border: 1px solid black;
+	padding: 30px;
+	margin-left: 25%;
+	margin-right: 25%;
 	
 }
 
 .userfile:hover {
 	
 	color: black;
+	
+}
+
+.userfilewrapper {
+	
+	margin-top: 20px;
+	text-align: center;
 	
 }
 
