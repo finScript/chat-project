@@ -98,7 +98,7 @@
 		
 	</head>
 	
-	<body onload="trackTime(); inpSendText(1); hideLoaders(); hideFileSelect(); setTimeout('handleMessages();', p_intervall);">
+	<body onload="trackTime(); inpSendText(1); hideLoaders(); hideFileSelect(); setTimeout('handleMessages();', 500);">
 		
 		<audio id="notification" src="audio/notification.wav" type="audio/wav"></audio>
 		

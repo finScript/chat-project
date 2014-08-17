@@ -165,9 +165,23 @@
 	
 }
 
+.userfile {
+	
+	color: blue;
+	
+}
 
+.userfile:hover {
+	
+	color: black;
+	
+}
 
-
+.userimgwrapper {
+	
+	text-align: center;
+	
+}
 
 
 

@@ -161,7 +161,9 @@ function inpSendText(i) {
 }
 
 
-function writeMessage(action, msg, username, time, date) {
+function writeMessage(action, msg, username, time, date, msg_type) {
+	
+	//alert(msg_type + "write");
 	
 	var m;
 	var timestring = "<span class='time_posted'>&#91;" + date + ", " + time + "&#93;&#58;</span>&nbsp;";
@@ -201,7 +203,60 @@ function writeMessage(action, msg, username, time, date) {
 		
 	} else if(action == "write") {
 		
-		m = '<div class="msg_wrapper"><label class="msg_username">' + username + ':</label><br /><label class="message">' + timestring + msg + '</label></div>';
+		if(msg_type == "text") {
+			
+			m = '<div class="msg_wrapper"><label class="msg_username">' + username + ':</label><br /><label class="message">' + timestring + msg + '</label></div>';
+			
+		} else if(msg_type == "image") {
+			
+			try {
+			
+				img_id = msg.split("_")[0];
+				
+				msg_wrapper = document.createElement("div");
+				msg_wrapper.className = "msg_wrapper";
+				
+				msg_username = document.createElement("label");
+				msg_username.className = "msg_username";
+				
+				lblmsg = document.createElement("label");
+				lblmsg.className = "message";
+				
+				imgdiv = document.createElement("div");
+				imgdiv.className = "userimgwrapper";
+				
+				userimg = document.createElement("img");
+				userimg.className = "userimg";
+				userimg.setAttribute("id", img_id);
+				userimg.setAttribute("src", "files/" + msg);
+				
+				
+				
+				msg_area = _("msg_area");
+				
+				msg_wrapper.appendChild(msg_username);
+				msg_wrapper.appendChild(lblmsg);
+				
+				imgdiv.appendChild(userimg);
+				
+				msg_wrapper.appendChild(imgdiv);
+				
+				msg_area.appendChild(msg_wrapper);
+				
+			} catch(ex) {
+				
+				alert(ex.toString());
+				
+			}
+			
+			m = "";
+			resizeImg(userimg);
+			
+		} else if(msg_type == "file") {
+			
+			m = '<div class="msg_wrapper"><label class="msg_username">' + username + ':</label><br /><label class="message">' + timestring + '<a title="Download" class="userfile" href="files/' + msg + '" download>' + msg + '</a>' + '</label></div>';
+			
+		}
 		
 	}
 	
@@ -233,9 +288,9 @@ function sendMessage() {
 	
 	//alert(getD());
 	
-	addToQueue(username, msg, time, date);
+	addToQueue(username, msg, time, date, 'text');
 	
-	writeMessage('write', msg, username, time, date);
+	writeMessage('write', msg, username, time, date, 'text');
 	
 	_("txt_message").value = "";
 	//inpSendText(1);
@@ -275,7 +330,7 @@ function testFunc() {
 
 
 
-function addToQueue(username, msg, time, date) {
+function addToQueue(username, msg, time, date, msg_type) {
 	
 	try {
 		if(msg_array == undefined) {
@@ -286,7 +341,8 @@ function addToQueue(username, msg, time, date) {
 					"username":username,
 					"msg":msg,
 					"time":time,
-					"date":date
+					"date":date,
+					"msg_type":msg_type
 				}
 				
 			];
@@ -298,7 +354,8 @@ function addToQueue(username, msg, time, date) {
 				"username":username,
 				"msg":msg,
 				"time":time,
-				"date":date
+				"date":date,
+				"msg_type":msg_type
 				
 			});
 			
@@ -421,8 +478,12 @@ function handleResponses(resp) {
 			var t = resp.getElementsByTagName("time_read" + i)[0].childNodes[0].nodeValue;
 			var d = resp.getElementsByTagName("date_posted" + i)[0].childNodes[0].nodeValue;
 			var m = resp.getElementsByTagName("msg" + i)[0].childNodes[0].nodeValue;
+			var m_t = resp.getElementsByTagName("msg_type" + i)[0].childNodes[0].nodeValue;
 			
-			addToQueue(u, m, t, d);
+			addToQueue(u, m, t, d, m_t);
+			
+			//alert(m_t);
+			
 		} catch(ex) {
 			
 			__(ex.toString());
@@ -447,8 +508,9 @@ function emptyMessages() {
 		var t = msg_array[i].time;
 		var d = msg_array[i].date;
 		var m = msg_array[i].msg;
+		var m_t = msg_array[i].msg_type;
 		
-		writeMessage('write', m, u, t, d);
+		writeMessage('write', m, u, t, d, m_t);
 		
 		__("wrote message.");
 		
@@ -467,7 +529,7 @@ function emptyEvents() {
 		var t = event_array[i].occurred;
 		var e = event_array[i].ev;
 		
-		writeMessage(e, '', u, t, '');
+		writeMessage(e, '', u, t, '', '');
 		
 		__("wrote event: u = " + u + "; t = " + t + "; e = " + e);
 		
@@ -520,7 +582,32 @@ function checkEnterSend(e) {
 	
 }
 
-
+function resizeImg(el) {
+	
+	try {
+		
+		w = el.clientWidth;
+		h = el.clientHeight;
+		
+		if(w > 500 && w < 1000) {
+			
+			el.setAttribute("width", w / 2);
+			el.setAttribute("height", h / 2);
+			
+		} else if(w > 1000) {
+			
+			el.setAttribute("width", w / 3);
+			el.setAttribute("height", h / 3);
+			
+		}
+		
+	} catch(ex) {
+		
+		alert(ex.toString());
+		
+	}
+	
+}
 
 
 

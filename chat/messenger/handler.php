@@ -260,6 +260,7 @@
 					array_push($messages, [
 						
 						"username" => $row->username,
+						"msg_type" => $row->msg_type,
 						"time_read" => $row->time_read,
 						"date_posted" => $row->date_posted,
 						"msg" => $row->msg,
@@ -312,9 +313,9 @@
 				$sql = "
 				
 				INSERT INTO
-					messages(username, chatkey, time_posted, time_read, date_posted, msg)
+					messages(username, chatkey, msg_type, time_posted, time_read, date_posted, msg)
 				VALUES
-					('" . $user->username . "', '" . $user->access_to . "', '" . time() . "', '" . $msg_arr[$i]["time"] . "', '" . $msg_arr[$i]["date"] . "', '" . $msg_arr[$i]["msg"] . "')";
+					('" . $user->username . "', '" . $user->access_to . "', 'text', '" . time() . "', '" . $msg_arr[$i]["time"] . "', '" . $msg_arr[$i]["date"] . "', '" . $msg_arr[$i]["msg"] . "')";
 				
 				if($res = $db->query($sql)) {
 					continue;
@@ -356,6 +357,7 @@
 				if($message["username"] != $_user->username) {
 				
 					$r .= "<user$count>" . $message["username"] . "</user$count>";
+					$r .= "<msg_type$count>" . $message["msg_type"] . "</msg_type$count>";
 					$r .= "<time_read$count>" . $message["time_read"] . "</time_read$count>";
 					$r .= "<date_posted$count>" . $message["date_posted"] . "</date_posted$count>";
 					$r .= "<msg$count>" . $message["msg"] . "</msg$count>";
