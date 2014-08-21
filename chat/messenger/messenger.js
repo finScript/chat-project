@@ -218,9 +218,12 @@ function writeMessage(action, msg, username, time, date, msg_type) {
 				
 				msg_username = document.createElement("label");
 				msg_username.className = "msg_username";
+				ap_user = document.createTextNode(username);
+				msg_username.appendChild(ap_user);
 				
 				lblmsg = document.createElement("label");
 				lblmsg.className = "message";
+				lblmsg.innerHTML = "<br />" + timestring + "<br /><br />";
 				
 				imgdiv = document.createElement("div");
 				imgdiv.className = "userimgwrapper";
@@ -242,7 +245,7 @@ function writeMessage(action, msg, username, time, date, msg_type) {
 				msg_wrapper.appendChild(imgdiv);
 				
 				msg_area.appendChild(msg_wrapper);
-				resizeImg(img_id);
+				userimg.addEventListener('load', function() { resizeImg(img_id); });
 				
 			} catch(ex) {
 				

@@ -58,8 +58,9 @@
 		<link rel="icon" type="image/png" href="../ch.png" />
 		<script type="text/javascript" src="start_session.js"></script>
 		<script type="text/javascript" src="time.js"></script>
+		<script type="text/javascript" src="../jquery.js"></script>
 	</head>
-	<body onload="trackTime();">
+	<body onload="trackTime(); hideLoaders();">
 		
 		<p id="top_bar" style="border-bottom: 1px solid black; padding-bottom:5px;"><?php echo "Logged in as <b>" . $user->username . "</b>"; ?><span id="cur_time"></span></p>
 		<h1>Confirm New Session</h1>
@@ -82,7 +83,7 @@
 						if(!$res->num_rows) {
 						
 							$error_count++;
-							echo "<img src='img/invalidicon.png' width='20' height='20' style='vertical-align: -4px;' />&nbsp;<span style='color:red;'><b>" . $u_search . " --INVALID USERNAME!--</b></span>";
+							echo "<img src='img/invalidicon.png' width='20' height='20' style='vertical-align: -4px;' />&nbsp;<span style='color:red;'><b>" . $u_search . " (user not found)</b></span>";
 							
 						} elseif($u_search == $user->username) {
 							
@@ -91,7 +92,7 @@
 							
 						} else {
 							
-							echo "<img src='img/validicon.png' width='20' height='20' style='vertical-align: -4px;' />&nbsp;<span style='color:green'>" . $u_search . "</span>";
+							echo "<img src='img/question_yellow.png' width='20' height='20' style='vertical-align: -4px;' />&nbsp;<span style='color:green'>" . $u_search . "</span>";
 							
 						}
 						
@@ -119,15 +120,51 @@
 			
 			<label>
 				
-				Set Session Topic:
 				<br />
 				<input type="hidden" id="hid_participants" value="<?php echo $q; ?>" />
 				<input type="hidden" id="hid_host" value="<?php echo $user->username; ?>" />
-				<input type="text" id="txt_topic" />
-				<button onclick="start()" type="button" <?php if($error_count != 0) echo "disabled"; ?>>Confirm and Create Session</button>
 				<br />
 				
 			</label>
+			
+			<table cellpadding="10">
+				
+				<tr>
+					
+					<td><label for="txt_topic">Topic:</label></td>
+					<td><input type="text" id="txt_topic" style="width: 300px;" /></td>
+					
+				</tr>
+				
+				<tr>
+					
+					<td></td>
+					<td><input type="checkbox" id="cb_public" checked>Public</input></td>
+					
+				</tr>
+				
+				<tr>
+					
+					<td></td>
+					<td><input type="checkbox" id="cb_dev" checked>Dev</input></td>
+					
+				</tr>
+				
+				<tr>
+					
+					<td></td>
+					<td><button id="create_btn" onclick="start()" type="button" <?php if($error_count != 0) echo "disabled"; ?> style="width: 100%;">Confirm and Create Session</button></td>
+					<td><img id="loader" src="img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" /></td>
+					
+				</tr>
+				
+			</table>
+			
+			
+			
+			<div id="successfull">
+				
+			</div>
 			
 		</div>
 		

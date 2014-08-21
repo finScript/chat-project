@@ -7,6 +7,9 @@
 
 <html>
 	<head>
+		
+		<title>Chat Hole</title>
+		
 		<link rel="stylesheet" type="text/css" href="global_style.css" />
 		<link rel="stylesheet" type="text/css" href="local_style.css" />
 		<link rel="icon" type="image/png" href="ch.png" />
@@ -60,7 +63,7 @@
 				$db = new mysqli(_host, _user, _pass, _dbname);
 				$res = $db->query($sql);
 				
-				echo "<h3>Invitations:</h3>";
+				echo "<h3><img src='chat/img/invites.png' width='40' height='40' style='vertical-align: -8px;' />&nbsp;&nbsp;Invitations:</h3>";
 				
 				if($res->num_rows) {
 					
@@ -119,7 +122,7 @@
 				$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "'";
 				$res = $db->query($sql);
 				
-				echo "<h3>Hostings:</h3>";
+				echo "<h3><img src='chat/img/hostings.png' width='40' height='40' style='vertical-align: -8px;' />&nbsp;Hostings:</h3>";
 					
 				if($res->num_rows) {
 					
@@ -140,7 +143,7 @@
 				$sql = "SELECT * FROM participants WHERE username = '" . $user->username . "'";
 				$res = $db->query($sql);
 				
-				echo "<h3>Participations:</h3>";
+				echo "<h3><img src='chat/img/participant.png' width='40' height='40' style='vertical-align: -8px;' />&nbsp;Participations:</h3>";
 				
 				if($res->num_rows) {
 					

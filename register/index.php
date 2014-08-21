@@ -9,12 +9,16 @@
 <html>
 	
 	<head>
+		
+		<title>Register</title>
+		
 		<script type="text/javascript" src="../jquery.js"></script>
 		<script type="text/javascript" src="../chat/time.js"></script>
 		<script type="text/javascript" src="register.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="../global_style.css" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="icon" type="iamge/png" href="../ch.png" />
 		
 		
 	</head>
@@ -26,6 +30,8 @@
 		<div id="top_bar">
 			
 			<a href="../login">Log In</a>
+			|
+			<a href="../">Home</a>
 			|
 			<img src="../chat/img/calendar.png" width="20" height="20" style="vertical-align: -4px;" />&nbsp;<span id="cur_time"></span>
 			

@@ -43,7 +43,7 @@
 						$user->email = $row_2->email;
 						$user->sessionkey = $row_2->sessionkey;
 						
-						$db_2 = new mysqli('localhost', 'root', '', 'chat');
+						$db_2 = new mysqli(_host, _user, _pass, _dbname);
 						$res_3 = $db_2->query("SELECT * FROM participants WHERE username = '" . $row_2->username . "'");
 						if($res_3->num_rows) {
 							
