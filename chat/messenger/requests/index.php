@@ -102,7 +102,8 @@
 			} else echo "<div style='margin-left: 30px;'>No requests!</div>";
 			
 		?>
-		
+		<br />
+		<a href="" onclick="event.preventDefault(); window.close()" style="color: red;"><img src="../../img/invalidicon.png" width="20" height="20" style="vertical-align: -4px" />&nbsp;Close</a>
 		
 	</body>
 	

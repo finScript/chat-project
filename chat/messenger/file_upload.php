@@ -22,7 +22,7 @@
 	$file_size = $f['size'];
 	$file_type = $f['type'];
 	
-	$ext = pathinfo($file_name, PATHINFO_EXTENSION);
+	$ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 	
 	if($ext == "png" or $ext == "gif" or $ext == "jpg" or $ext == "jpeg") $m_type = "image";
 	else $m_type = "file";

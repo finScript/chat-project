@@ -78,7 +78,7 @@
 						echo "<th>Session Name</th>";
 						echo "<th>Session Host</th>";
 						echo "<th>People</th>";
-						echo "<th class='centered'>Chat Key</th>";
+						echo "<th class='centered'>Action</th>";
 						
 					echo "</tr>";
 					
@@ -106,7 +106,12 @@
 							echo "<td>" . $session_name . "</td>";
 							echo "<td>" . $session_host . "</td>";
 							echo "<td>" . $session_participants . "</td>";
-							echo "<td class='centered'><a href='chat/messenger/'><b><a href='chat/messenger/request.php?host=$session_host'>" . $chatkey . "</a></b></a></td>";
+							echo "<td class='centered'><a href='chat/messenger/'><b><a href='chat/messenger/request.php?host=$session_host' class='btn_enter'>
+							Accept&nbsp;<img src='chat/img/arrow_right.png' width='20' height='20' style='vertical-align:-4px;' /></a>
+							&nbsp;
+							<a href='chat/messenger/decline.php?host=$session_host' class='btn_delete'>
+							Decline&nbsp;<img src='chat/img/invalidicon.png' width='20' height='20' style='vertical-align:-4px;' /></a>
+							</b></a></td>";
 							
 						echo "</tr>";
 						
@@ -128,13 +133,13 @@
 					
 					while($row = $res->fetch_object()) {
 						echo "You are hosting the following session: <b>";
-						echo $row->name . " (
+						echo $row->name . " -
 							
-							<a href='chat/messenger/'><img src='chat/img/arrow_right.png' width='20' height='20' style='vertical-align:-4px;' /></a>
-							<a href='chat/messenger/delete.php'><img src='chat/img/invalidicon.png' width='20' height='20' style='vertical-align:-4px;' /></a>
+							<a href='chat/messenger/' class='btn_enter'>Enter&nbsp;<img src='chat/img/arrow_right.png' width='20' height='20' style='vertical-align:-4px;' /></a>
+							<a href='chat/messenger/delete.php' class='btn_delete'>Delete&nbsp;<img src='chat/img/invalidicon.png' width='20' height='20' style='vertical-align:-4px;' /></a>
 							
 							
-						)</b><br/><br/><hr>";
+						</b><br/><br/><hr>";
 						
 					}
 					
@@ -158,9 +163,7 @@
 							
 							echo $row_2->name . " (
 								
-								<a href='chat/messenger/'><img src='chat/img/arrow_right.png' width='20' height='20' style='vertical-align:-4px;' /></a>
-								<a href='chat/messenger/delete.php'><img src='chat/img/invalidicon.png' width='20' height='20' style='vertical-align:-4px;' /></a>
-								
+								<a href='chat/messenger/' class='btn_enter'>Enter <img src='chat/img/arrow_right.png' width='20' height='20' style='vertical-align:-4px;' /></a>
 								
 							)";
 							

@@ -225,7 +225,11 @@ function inviteUser() {
 }
 
 
-
+function openRequests() {
+	
+	window.open("requests", "", "width=600,height=600");
+	
+}
 
 
 

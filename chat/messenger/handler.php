@@ -315,7 +315,7 @@
 				INSERT INTO
 					messages(username, chatkey, msg_type, time_posted, time_read, date_posted, msg)
 				VALUES
-					('" . $user->username . "', '" . $user->access_to . "', 'text', '" . time() . "', '" . $msg_arr[$i]["time"] . "', '" . $msg_arr[$i]["date"] . "', '" . $msg_arr[$i]["msg"] . "')";
+					('" . $user->username . "', '" . $user->access_to . "', 'text', '" . time() . "', '" . $msg_arr[$i]["time"] . "', '" . $msg_arr[$i]["date"] . "', '" . htmlentities(addslashes($msg_arr[$i]["msg"])) . "')";
 				
 				if($res = $db->query($sql)) {
 					continue;

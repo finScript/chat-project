@@ -22,3 +22,10 @@ body {
 	display: none;
 	
 }
+
+.msg_username {
+	
+	font-weight: bold;
+	color: blue;
+	
+}

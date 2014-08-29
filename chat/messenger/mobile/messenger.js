@@ -166,7 +166,7 @@ function writeMessage(action, msg, username, time, date, msg_type) {
 	//alert(msg_type + "write");
 	
 	var m;
-	var timestring = "<span class='time_posted'>&#91;" + date + ", " + time + "&#93;&#58;</span>&nbsp;";
+	var timestring = "<span class='time_posted'>&#91;" + time + "&#93;&#58;</span>&nbsp;";
 	var timestring_grey = "<span class='time_posted_grey'>&#91;" + time + "&#93;&#58;</span>&nbsp;";
 	var timestring_red = "<span class='time_posted_red'>&#91;" + time + "&#93;&#58;</span>&nbsp;";
 	
@@ -205,7 +205,7 @@ function writeMessage(action, msg, username, time, date, msg_type) {
 		
 		if(msg_type == "text") {
 			
-			m = '<div class="msg_wrapper"><label class="msg_username">' + username + ':</label><br /><label class="message">' + timestring + msg + '</label></div>';
+			m = '<div class="msg_wrapper"><label class="msg_username">' + username + '[' + timestring + ']:</label><label class="message">' + msg + '</label></div>';
 			
 		} else if(msg_type == "image") {
 			
@@ -603,7 +603,7 @@ function resizeImg(el) {
 			img_width = _(el).clientWidth;
 			
 			if(img_width > msg_area_width) {
-				_(el).setAttribute("width", img_width / 2);
+				_(el).setAttribute("width", msg_area_width - 20);
 			}
 			
 		} catch(ex) {

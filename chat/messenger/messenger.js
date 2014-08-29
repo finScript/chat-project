@@ -289,11 +289,24 @@ function writeMessage(action, msg, username, time, date, msg_type) {
 	
 }
 
+var tagsToReplace = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;'
+};
+
+function replaceTag(tag) {
+    return tagsToReplace[tag] || tag;
+}
+
+function safe_tags_replace(str) {
+    return str.replace(/[&<>]/g, replaceTag);
+}
 
 function sendMessage() {
 	
 	var username = getUsername();
-	var msg = _("txt_message").value;
+	var msg = safe_tags_replace(_("txt_message").value);
 	var time = getT_only();
 	var date = getD();
 	

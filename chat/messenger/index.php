@@ -22,6 +22,15 @@
 		die();
 	}
 	
+	require "Mobile_Detect.php";
+	$mobile = new Mobile_Detect;
+	
+	if($mobile->isMobile()) {
+		
+		header("location: mobile");
+		die();
+		
+	}
 	
 	
 	function getKey($database, $u) {
@@ -95,10 +104,23 @@
 		<script type="text/javascript" src="../time.js"></script>
 		<script type="text/javascript" src="../../jquery.js"></script>
 		
+		<script type="text/javascript">
+			
+			window.addEventListener("load", function() {
+				
+				$("#page_loading").fadeOut(1000);
+				
+			});
+			
+		</script>
 		
 	</head>
 	
 	<body onload="trackTime(); inpSendText(1); hideLoaders(); hideFileSelect(); setTimeout('handleMessages();', 500);">
+		
+		<div id="page_loading">
+			<div id="loading"><img src="../img/loader.gif" width="100" height="100" style="vertical-align: -40px"/>&nbsp;Loading Messenger...</div>
+		</div>
 		
 		<audio id="notification" src="audio/notification.wav" type="audio/wav"></audio>
 		
@@ -147,134 +169,137 @@
 			
 			<hr>
 			<div id="event_area" style="float:right;"><h4>Events:</h4></div>
-			<?php
-				
-				$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "'";
-				$res = $db->query($sql);
-				
-				if($res->num_rows) {
-					
-					?>
-					
-					<div id="host_actions">
-						
-
-						<label><b>Host actions:</b></label>&nbsp;
-						<a href="" onclick="event.preventDefault(); initAction('kick');" id="kick_user">
-						
-							<img src="../img/yellowcross.png" width="23" height="23" style="vertical-align: -5px;" />
-							Kick User
-							
-						</a>
-						|
-						<a href="" onclick="event.preventDefault(); initAction('invite');" id="invite_user">
-							
-							<img src="../img/inviteicon.png" width="25" height="25" style="vertical-align: -7px;" />
-							Invite User
-							
-						</a>
-						|
-						<a href="requests" id="invite_user" target="_blank" style="color: ">
-							
-							<img src="../img/requests.png" width="25" height="25" style="vertical-align: -7px;" />
-							See Requests
-							
-						</a>
-						|
-						<a href="" onclick="event.preventDefault(); initAction('rename');" id="rename_session">
-							
-							<img src="../img/rename.png" width="20" height="20" style="vertical-align: -4px;" />
-							Rename Session
-							
-						</a>
-						|
-						<a href="" onclick="event.preventDefault(); initAction('hosts');" id="switch_hosts">
-							
-							<img src="../img/reload.png" width="20" height="20" style="vertical-align: -4px;" />
-							Switch Hosts
-							
-						</a>
-						|
-						<a href="" onclick="event.preventDefault(); initAction('end');" id="end_session">
-							
-							<img src="../img/invalidicon.png" width="20" height="20" style="vertical-align: -4px;" />
-							End Session
-							
-						</a>
-						
-						<div id="kick_user_inp">
-						
-							<label>Enter username: <input type="text" id="txt_kick_user" /></label>
-							
-							<button type="button" onclick="kickUser()">Go</button>
-							
-							<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(0);" />
-							
-							<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_0" />
-							
-						</div>
-						<div id="invite_user_inp">
-						
-							<label>Enter username: <input type="text" id="txt_invite_user" /></label>
-							
-							<button type="button" onclick="inviteUser()">Go</button>
-							
-							<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(1);" />
-							
-							<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_1" />
-							
-						</div>
-						<div id="rename_session_inp">
-						
-							<label>Enter name: <input type="text" id="txt_rename_session" /></label>
-							
-							<button type="button" onclick="renameSession()">Go</button>
-							
-							<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(2);" />
-							
-							<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_2" />
-							
-						</div>
-						<div id="switch_hosts_inp">
-						
-							<label>Enter username (must be participating this session!): <input type="text" id="txt_new_host" /></label>
-							
-							<button type="button" onclick="switchHosts()">Go</button>
-							
-							<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(3);" />
-							
-							<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_3" />
-							
-						</div>
-						<div id="end_session_inp">
-						
-							<label>Enter your password: <input type="password" id="txt_end_session_pwd" /></label>
-							
-							<button type="button" onclick="endSession()">Go</button>
-							
-							<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(4);" />
-							
-							<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_4" />
-							
-						</div>
-						
-						
-					</div>
-					
-					
-					<?php
-					
-				} else {
-					echo "<div style='margin-top: 15px;'>Host: <b>$session_host</b></div>";
-				}
-				//moro
 			
-				
-				
-				
-			?>
 			
 			<div id="msg_area">
+				
+				<?php
+				
+					$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "'";
+					$res = $db->query($sql);
+					
+					if($res->num_rows) {
+						
+						?>
+						
+						<div id="host_actions">
+							
+
+							<label><b>Host actions:</b></label>&nbsp;
+							<a href="" onclick="event.preventDefault(); initAction('kick');" id="kick_user">
+							
+								<img src="../img/yellowcross.png" width="23" height="23" style="vertical-align: -5px;" />
+								Kick User
+								
+							</a>
+							|
+							<a href="" onclick="event.preventDefault(); initAction('invite');" id="invite_user">
+								
+								<img src="../img/inviteicon.png" width="25" height="25" style="vertical-align: -7px;" />
+								Invite User
+								
+							</a>
+							|
+							<a href="" id="invite_user" onclick="event.preventDefault(); openRequests();" style="color: ">
+								
+								<img src="../img/requests.png" width="25" height="25" style="vertical-align: -7px;" />
+								See Requests
+								
+							</a>
+							|
+							<a href="" onclick="event.preventDefault(); initAction('rename');" id="rename_session">
+								
+								<img src="../img/rename.png" width="20" height="20" style="vertical-align: -4px;" />
+								Rename Session
+								
+							</a>
+							|
+							<a href="" onclick="event.preventDefault(); initAction('hosts');" id="switch_hosts">
+								
+								<img src="../img/reload.png" width="20" height="20" style="vertical-align: -4px;" />
+								Switch Hosts
+								
+							</a>
+							|
+							<a href="" onclick="event.preventDefault(); initAction('end');" id="end_session">
+								
+								<img src="../img/invalidicon.png" width="20" height="20" style="vertical-align: -4px;" />
+								End Session
+								
+							</a>
+							
+							<div id="kick_user_inp">
+							
+								<label>Enter username: <input type="text" id="txt_kick_user" /></label>
+								
+								<button type="button" onclick="kickUser()">Go</button>
+								
+								<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(0);" />
+								
+								<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_0" />
+								
+							</div>
+							<div id="invite_user_inp">
+							
+								<label>Enter username: <input type="text" id="txt_invite_user" /></label>
+								
+								<button type="button" onclick="inviteUser()">Go</button>
+								
+								<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(1);" />
+								
+								<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_1" />
+								
+							</div>
+							<div id="rename_session_inp">
+							
+								<label>Enter name: <input type="text" id="txt_rename_session" /></label>
+								
+								<button type="button" onclick="renameSession()">Go</button>
+								
+								<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(2);" />
+								
+								<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_2" />
+								
+							</div>
+							<div id="switch_hosts_inp">
+							
+								<label>Enter username (must be participating this session!): <input type="text" id="txt_new_host" /></label>
+								
+								<button type="button" onclick="switchHosts()">Go</button>
+								
+								<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(3);" />
+								
+								<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_3" />
+								
+							</div>
+							<div id="end_session_inp">
+							
+								<label>Enter your password: <input type="password" id="txt_end_session_pwd" /></label>
+								
+								<button type="button" onclick="endSession()">Go</button>
+								
+								<img class="hideAction" src="../img/arrowup.png" width="20" height="20" style="vertical-align: -4px;" onclick="hideAction(4);" />
+								
+								<img src="../img/loader_gif.gif" width="20" height="20" style="vertical-align: -4px;" id="loader_4" />
+								
+							</div>
+							
+							
+						</div>
+						
+						
+						<?php
+						
+					} else {
+						echo "<div style='margin-top: 15px;'>Host: <b>$session_host</b></div>";
+					}
+					//moro
+				
+					
+					
+					
+				?>
+				
 				
 				
 				<div id="welcome">
