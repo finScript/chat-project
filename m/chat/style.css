@@ -1,0 +1,78 @@
+#wrapper {
+	
+	padding-left: 15px;
+	margin-top: 5px;
+	
+}
+
+#chat_enter {
+	
+	margin-bottom: 30px;
+	
+}
+
+#chat_active {
+	
+	margin-top: 30px;
+	margin-bottom: 30px;
+	
+}
+
+#chat_active #chat_active_subsect {
+	
+	padding-left: 30px;
+	
+}
+
+#chat_start {
+	
+	margin-bottom: 30px;
+	margin-top: 30px;
+	
+}
+
+#chat_start #chat_start_subsect {
+	
+	margin-left: 30px;
+	
+}
+
+.chat_session {
+	
+	padding-bottom: 5px;
+	
+}
+
+footer {
+	
+	text-align: center;
+	
+}
+
+#session_table {
+	
+	border-spacing: 0px;
+	border-color: lightgrey;
+	
+}
+
+#session_table th {
+	
+	text-align: left;
+	
+}
+
+
+#top_bar {
+	border-bottom: 1px solid black;
+	padding-bottom: 10px;
+}
+
+.centered {
+	
+	text-align: center;
+	
+}
+
+
+

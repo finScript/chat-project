@@ -161,11 +161,11 @@
 						
 						while($row_2 = $res_2->fetch_object()) {
 							
-							echo $row_2->name . " (
+							echo $row_2->name . "
 								
 								<a href='chat/messenger/' class='btn_enter'>Enter <img src='chat/img/arrow_right.png' width='20' height='20' style='vertical-align:-4px;' /></a>
 								
-							)";
+							";
 							
 						}
 						
