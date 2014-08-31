@@ -114,7 +114,7 @@ function setErrorCount(i) {
 
 function trackTime() {
 	
-	_("cur_time").innerHTML = " | " + getT();
+	_("cur_time").innerHTML = getT();
 	setTimeout("trackTime()", 1000);
 	
 }

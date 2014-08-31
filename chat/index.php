@@ -26,6 +26,7 @@
 	
 	<body onload="hideLoaders(); refreshSessions(); trackTime();">
 		
+		<div id="wrapper">
 		<input type="hidden" id="hid_username" value="<?php echo $user->username; ?>" />
 		
 		<p id="top_bar">
@@ -37,25 +38,24 @@
 				<a href="../">Home</a>
 				|
 				<a href="messenger">Messenger</a>
-				|
-				<img src='img/calendar.png' width='20' height='20' style='vertical-align: -4px;' />
 				<span id="cur_time"></span>
 				
 			</label>
 			
 		</p>
 		
-		<div id="wrapper">
-			<h1>Chat Lobby</h1>
+		
+			<h1>Chat Hole - Lobby</h1>
 			<hr>
 			<br />
 			<div id="chat_enter">
 				
 				<label>
 					
-					Enter a session key (received by chat host):
-					<input type="text" id="txt_sessionkey" onkeyup="checkKey()" style="width: 300px;" /><button id="sessionkey_button" onclick="enterChat()" type="button" disabled>Enter</button>
-					<img src="img/loader_gif.gif" width="20" height="20" id="loader_gif_enter" style="vertical-align: -5px;" />
+					Enter a session key (received by chat host):<br />
+					<input type="text" id="txt_sessionkey" onkeyup="checkKey()" style="width: 90%; height: 2em;" />
+					<button class="btn_enter" style="width: 8%;" id="sessionkey_button" onclick="enterChat()" type="button" disabled>Enter</button>
+					<img src="img/loader.gif" width="20" height="20" id="loader_gif_enter" style="vertical-align: -5px;" />
 					<span id="key_status"></span>
 					
 				</label>
@@ -67,37 +67,37 @@
 			<div id="chat_active">
 				
 				<h3>Active chats: <a href="" onclick="event.preventDefault(); refreshSessions();"><img src="img/reload.png" width="20" height="20" style="vertical-align: -5px;" id="refresh_icon"/></a></h3>
-				<div id="chat_active_subsect">
-					<p id="searching">
-						Searching sessions... <img src="img/loader_gif.gif" width="20" height="20" id="loader_gif_session" style="vertical-align: -5px;" />
-					</p>
+
+				<p id="searching">
+					Updating sessions... <img src="img/loader.gif" width="20" height="20" id="loader_gif_session" style="vertical-align: -5px;" />
+				</p>
+				
+				<table cellpadding="10" border="1" id="session_table">
 					
-					<table cellpadding="10" border="1" id="session_table">
+					<tr>
 						
-						<tr>
-							
-							<th>
-								<label>Session Name</label>
-							</th>
-							
-							<th>
-								<label>Participants</label>
-							</th>
-							
-							<th>
-								<label>Host</label>
-							</th>
-							
-							<th>
-								
-							</th>
-						</tr>
+						<th>
+							<label>Session Name</label>
+						</th>
 						
+						<th>
+							<label>Participants</label>
+						</th>
 						
+						<th>
+							<label>Host</label>
+						</th>
 						
-					</table>
+						<th>
+							
+						</th>
+					</tr>
 					
-				</div>
+					
+					
+				</table>
+				
+
 				
 			</div>
 			
@@ -115,12 +115,14 @@
 				
 			</div>
 			
-			<hr>
 			
-			<footer>Chat | &copy;2014 Elias Nieminen</footer>
 			
 		</div>
-		
+		<div id="footer">
+			
+			&copy;2014 Elias Nieminen
+			
+		</div>
 	</body>
 	
 </html>

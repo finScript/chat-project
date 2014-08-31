@@ -73,6 +73,7 @@ function hideLoaders() {
 	}
 	
 	$("#request").hide();
+	$("#event_area").hide();
 	//setTimeout('$("#request").slideDown();', 1000);
 	
 }

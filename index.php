@@ -29,6 +29,7 @@
 	</head>
 		
 	<body onload="trackTime();">
+		<div id="wrapper">
 		<?php
 			
 			$user;
@@ -36,21 +37,21 @@
 				
 				$user = unserialize($_SESSION['user']);
 				echo "<p id='top_bar'>Logged in as <b>" . $user->username . "</b> (<a href='logout'>Log out</a>) | <a href='chat'>Chat Lobby</a>
-				| <img src='chat/img/calendar.png' width='20' height='20' style='vertical-align: -4px;' />&nbsp;<span id='cur_time'></span></p>";
+				<span id='cur_time'></span></p>";
 				
 			} else {
 				
 				echo "<p id='top_bar'><a href='login'>Log In</a> | <a href='register'>Register</a>
-				| <img src='chat/img/calendar.png' width='20' height='20' style='vertical-align: -4px;' />&nbsp;<span id='cur_time'></span></p>";
+				<span id='cur_time'></span></p>";
 				
 			}
 			
 			?>
 			
-			<h1>Home</h1>
+			<h1>Chat Hole - Home</h1>
 			<hr>
 			
-			<div id="wrapper">
+			
 			
 			<?php
 			
@@ -164,6 +165,7 @@
 							echo $row_2->name . "
 								
 								<a href='chat/messenger/' class='btn_enter'>Enter <img src='chat/img/arrow_right.png' width='20' height='20' style='vertical-align:-4px;' /></a>
+								<a href='chat/messenger/leave.php' class='btn_delete'>Leave <img src='chat/img/invalidicon.png' width='20' height='20' style='vertical-align:-4px;' /></a>
 								
 							";
 							
@@ -180,16 +182,20 @@
 			} else {
 				?>
 				
-				<p>You have not logged in.</p>
+				<p>Please <b><a href="login">Log In</a></b> or <b><a href="register">Register</a></b> to start chatting!</p>
 				
 				<?php
 			}
 		
 		
 		?>
-	
-		</div>
 		
+		
+		
+		</div>
+		<div id="footer">
+			&copy;2014 Elias Nieminen
+		</div>
 	</body>
 
 </html>

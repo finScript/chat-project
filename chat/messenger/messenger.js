@@ -329,9 +329,10 @@ function getUsername() {
 }
 
 
+
 function testFunc() {
 	
-	if(msg_array != undefined) {
+	/* if(msg_array != undefined) {
 		
 		_("output").innerHTML = "<br />";
 		
@@ -348,7 +349,9 @@ function testFunc() {
 		
 	} else alert("undef");
 	
-	if(_("file_send").files.length == 0) alert("No files"); else alert(_("file_send").files[0].name);
+	if(_("file_send").files.length == 0) alert("No files"); else alert(_("file_send").files[0].name); */
+	
+	toggleEvents();
 	
 }
 
@@ -629,8 +632,55 @@ function resizeImg(el) {
 	
 }
 
+var events_toggled = false;
 
-
+function toggleEvents() {
+	
+	if(events_toggled) {
+		
+		$("#event_area").fadeOut(500, function() {
+			
+			$("#messenger").animate({
+				
+				"width":"100%"
+				
+			}, 1000);
+			
+			$("#txt_message").animate({
+				
+				"width":"85%"
+				
+			}, 1000);
+			
+			
+		});
+		
+		events_toggled = false;
+	} else {
+		$("#txt_message").animate({
+			
+			"width":"80%"
+			
+		}, 200);
+		
+		
+		
+		$("#messenger").animate({
+			
+			"width":"60%"
+			
+		}, 1000, function() {
+			
+			$("#event_area").fadeIn(500);
+			
+		});
+		
+		events_toggled = true;
+	}
+	
+	_("btn_toggle_events").innerHTML = events_toggled ? "Hide Events" : "Show Events";
+	
+}
 
 
 

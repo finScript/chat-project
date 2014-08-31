@@ -7,10 +7,25 @@
 	
 }
 
+@font-face {
+	
+	font-family: Louda RegularSC;
+	src: url(Louda-RegularSC.ttf);
+	
+}
+
 body {
 	
 	font-family: Clear Sans;
 	font-size: 1.20em;
+	
+	background-color: D6D6D6;
+	
+}
+
+h1 {
+	
+	
 	
 }
 
@@ -105,8 +120,32 @@ table th {
 }
 
 
+#wrapper {
+	
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 50%;
+	margin-left: 25%;
+	background-color: F5F5F5;
+	
+	border: 1px solid grey;
+	box-shadow: 2px 2px 2px #888888;
+	
+	min-height: 95%;
+	
+}
 
+#cur_time {
+	
+	float: right;
+	
+}
 
+#footer {
+	
+	text-align: center;
+	
+}
 
 
 

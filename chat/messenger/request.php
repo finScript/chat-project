@@ -15,13 +15,15 @@
 	$sessionname;
 	$sessionkey;
 	
-	$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "' AND chatkey = '" . $user->access_to . "'";
-	
-	if($db->query($sql)->num_rows) {
+	if(isset($user->access_to)) {
+		$sql = "SELECT * FROM active_chats WHERE host = '" . $user->username . "' AND chatkey = '" . $user->access_to . "'";
 		
-		header("location: ../messenger");
-		die();
-		
+		if($db->query($sql)->num_rows) {
+			
+			header("location: ../messenger");
+			die();
+			
+		}
 	}
 	
 	$sql = "SELECT * FROM active_chats WHERE host = '" . $_GET['host'] . "'";
